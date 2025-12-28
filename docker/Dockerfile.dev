@@ -1,0 +1,32 @@
+# =============================================================================
+# MAXNATE 3D WEBSITE - DEVELOPMENT DOCKERFILE
+# Hot reload support for local development
+# =============================================================================
+
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies for native modules
+RUN apk add --no-cache libc6-compat
+
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Install all dependencies (including devDependencies)
+RUN npm install
+
+# Copy application source
+COPY . .
+
+# Set environment variables
+ENV NODE_ENV development
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV WATCHPACK_POLLING true
+
+# Expose development port
+EXPOSE 3000
+
+# Start development server with hot reload
+CMD ["npm", "run", "dev"]

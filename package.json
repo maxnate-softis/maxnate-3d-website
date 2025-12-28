@@ -1,23 +1,43 @@
 {
   "name": "maxnate-3d-website",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "docker:dev": "docker-compose -f docker/docker-compose.yml up dev",
+    "docker:build": "docker-compose -f docker/docker-compose.yml build",
+    "docker:prod": "docker-compose -f docker/docker-compose.yml --profile prod up production",
+    "docker:stop": "docker-compose -f docker/docker-compose.yml down",
+    "gcp:setup": "powershell -ExecutionPolicy Bypass -File scripts/setup-gcp.ps1",
+    "gcp:deploy": "gcloud builds submit --config=.cloudbuild/cloudbuild.yaml"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
+    "@react-three/postprocessing": "^3.0.4",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.26",
+    "gsap": "^3.14.2",
+    "howler": "^2.2.4",
     "next": "16.1.1",
+    "postprocessing": "^6.38.2",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.4.0",
+    "three": "^0.182.0",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/howler": "^2.2.12",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.182.0",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
